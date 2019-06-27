@@ -7,7 +7,6 @@ vignette: >
   %\VignetteIndexEntry{workshopR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-number_sections: true
 ---
 
 ```{r setup, include = FALSE}
