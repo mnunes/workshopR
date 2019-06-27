@@ -13,4 +13,4 @@ VignetteBuilder: knitr
 URL: https://github.com/mnunes/workshopR
 BugReports: https://github.com/mnunes/workshopR/issues
 Imports: tidyverse, ggplot2, dplyr, knitr, rmarkdown
-VignetteBuilder: knitr
+RoxygenNote: 6.1.1
