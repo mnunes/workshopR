@@ -1,7 +1,5 @@
 ---
-title: "Workshop de R: Levando a Ciência de Dados para Todos"
-author: "Marcus Nunes - https://marcusnunes.me/"
-date: "18 e 19 de Julho de 2019"
+title: "workshopR"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{workshopR}
@@ -911,4 +909,7 @@ gapminder %>%
 - Lista Brasileira Oficial de Discussão do Programa R: http://r-br.2285057.n4.nabble.com/
 
 - Falem com seus coordenadores de curso e peçam disciplinas para o Departamento de Estatística
+
+
+
 
