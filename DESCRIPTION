@@ -1,0 +1,15 @@
+Package: workshopR
+Type: Package
+Title: Comece a Utilizar o R a partir deste Workshop
+Version: 0.1.0
+Date: 2019-07-01
+Author: Marcus Nunes
+Maintainer: Marcus Nunes <marcus@marcusnunes.me>
+Description: Material utilizado para acompanhar o workshop sobre R ministrado na UFRN no inverno de 2019. Este pacote instala o manual, conjuntos de dados e pacotes necessarios para que o workshop seja aproveitado.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+URL: https://github.com/mnunes/workshopR
+BugReports: https://github.com/mnunes/workshopR/issues
+Imports: tidyverse, ggplot2, dplyr, knitr, rmarkdown

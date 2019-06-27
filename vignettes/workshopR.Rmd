@@ -1,0 +1,915 @@
+---
+title: "Workshop de R: Levando a Ciência de Dados para Todos"
+author: "Marcus Nunes - https://marcusnunes.me/"
+date: "18 e 19 de Julho de 2019"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{workshopR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+number_sections: true
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(workshopR)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = TRUE,
+  eval = TRUE, 
+  message = FALSE,
+  fig.width = 6,
+  fig.height = 4.5,
+  tidy = FALSE
+)
+```
+
+# Preparação Necessária para Acompanhar este Workshop {-}
+
+- Instale o `R`: https://cran.r-project.org/
+
+- Instale o RStudio: https://www.rstudio.com/products/rstudio/download/
+
+- Com o RStudio aberto, instale o material do workshop:
+
+```{r instalacao, eval = FALSE}
+install.packages("devtools")
+devtools::install_github("mnunes/workshopR", build_vignettes=TRUE)
+```
+
+- Para ter acesso ao material em seu computador, carregue o pacote e suas instruções de uso através dos comandos 
+
+```{r instalacao02, eval = FALSE}
+library(workshopR)
+vignette("workshopR")
+```
+
+
+# Apresentação {-}
+
+- Marcus Nunes, professor do Departamento de Estatística da UFRN
+
+- Visualização de Dados
+
+- Aplicações da Estatística
+
+- Aprendizagem de Máquina
+
+- Big Data
+
+- https://marcusnunes.me/
+
+- marcus@marcusnunes.me
+
+
+
+# Conteúdo do Workshop {-}
+
+1. Reprodutibilidade nas pesquisas científica e aplicada
+ 
+2. R, RStudio e seu ambiente de programação
+ 
+3. Gráficos utilizando o pacote ggplot2
+ 
+4. Manipulação e processamento de dados
+ 
+5. Aplicação
+
+
+# Reprodutibilidade nas Pesquisas Científica e Aplicada
+
+- Há muitos programas capazes de realizar análises estatísticas
+
+- Excel, SPSS, Minitab e muitos outros
+
+- O problema destas soluções é não permitir de maneira fácil a reprodutibilidade das análises realizadas
+
+- Uma forma de resolver esta limitação é utilizar uma linguagem de programação
+
+- Analisando dados através de uma linguagem de programação, todos os passos da análise, desde a limpeza e preparação dos dados até a comunicação dos resultados, é documentada
+
+- `R`, `python` e `julia` são algumas das linguagens mais utilizadas para Ciência de Dados
+
+- Ciência de Dados é área do conhecimento que junta estatística e ciência da computação para transformar dados brutos em compreensão, ideias e conhecimento
+
+<img src="workshop.png" width="500">
+
+- Durante este workshop iremos começar a arranhar a superfície deste oceano de dados que temos disponível no mundo atual
+
+
+# R, RStudio e seu Ambiente de Programação
+
+- Após abrir o RStudio, é possível ver uma imagem parecida com essa:
+
+<img src="RStudio.png" width="500">
+
+- A janela do programa é dividida em quatro painéis principais. Podem haver pequenas variações em sua ordem, mas o fundamental está sempre presente. Tomando a imagem acima como referência, temos
+
+  - **Canto superior esquerdo:** aqui temos o editor de texto. Vamos escrever nossos códigos nesta área. Caso ele não esteja presente no seu RStudio, aperte as teclas Ctrl+Shift+N para abrir um novo arquivo de código. Aproveite e salve-o com o nome `workshopR.R`.
+  
+  - **Canto inferior esquerdo:** é o chamado _prompt_. É nele que os comandos são rodados.
+
+  - **Canto superior direito:** possui diversas abas chamadas Files, Plots, Packages, Help e Viewer. É neste painel que veremos os gráficos plotados e os arquivos de ajuda.
+  
+  - **Canto inferior direito:** possui as abas Environment, History, Connections e Build. A mais importante para este workshop é a aba Environment, onde podemos verificar quais variáveis estão presentes na memória do programa.
+
+- Nós vamos escrever todos os comandos no canto superior esquerdo e rodá-los com o atalho Ctrl+Enter
+
+- Se o resultado for algo numérico, ele aparecerá no canto inferior esquerdo; se for um gráfico, aparecerá no canto superior direito
+
+
+
+# Gráficos Utilizando o Pacote `ggplot2`
+
+- `ggplot2` é um pacote de visualização de dados
+
+- Foi criado por Hadley Wickham em 2005, baseado no livro _Grammar of Graphics_, de Leland Wilkinson, mas sua primeira versão só esteve disponível para o público em 2007
+
+- A ideia principal é criar gráficos como se eles fossem frases de uma língua, onde cada elemento do gráfico é uma palavra
+
+- Ou seja, vamos trabalhar com o conceito de **gramática de gráficos** (por isso o `gg` em `ggplot2`)
+
+- Isto nos permite construir gráficos tão complexos quanto quisermos
+
+- Os gráficos criados com esta ferramenta são, em geral, mais bonitos do que os gráficos tradicionais do `R` ou de outras ferramentas similares
+
+
+
+## Sintaxe Básica
+
+- O `ggplot2` exige que os dados a serem plotados estejam em um data frame
+
+- Não é possível plotar diretamente os dados presentes em uma matriz ou um vetor
+
+- **Sempre** teremos que transformar os dados para data frame ou construir um data frame com os dados que possuímos
+
+- Cada gráfico é formado por sete camadas: dados, estética, geometria, _facets_, estatística, coordenadas e tema
+
+- As três primeiras são fundamentais: **todo** gráfico vai possuí-las
+  
+  - dados: consistem na camada base; a partir dos dados que pensaremos quais variáveis serão trabalhadas
+
+  - estética: consiste nas variáveis selecionadas para plotagem, agrupamento, coloração etc.
+
+  - geometria: camada onde definimos as formas dos elementos gráficos, tais como pontos, linhas e e intervalos
+
+- As quatro seguintes são opcionais: elas permitem que personalizemos nossas visualizações
+
+  - _facets_: útil quando desejamos dividir informações do gráfico para uma melhor visualização, podendo ser utilizada para comparações de grupos
+
+  - estatística: é a camada que representa a análise dos dados, caso eles sejam transformados
+
+  - coordenadas: informa onde o gráfico será construído, se em coordenadas cartesianas ou polares, por exemplo
+
+  - tema: camada referente à visualização geral do gráfico
+
+- Trabalharemos com o conjunto de dados `mtcars`
+
+- Originalmente, este conjunto de dados faz parte do pacote `tidyverse`
+
+- Carregue este arquivo na memória do `R` através do comando
+
+```{r ggplot01a, echo = TRUE}
+# carregando o pacote do workshop
+
+library(workshopR)
+
+# carregando o conjunto de dados
+
+data("mpg")
+
+# entrando no help de mpg
+
+?mpg
+
+# verificando o conteudo do conjunto de dados
+
+str(mpg)
+```
+
+
+
+## Primeiro Gráfico
+
+- Nosso primeiro gráfico será feito a partir do conjunto de dados `mpg`
+
+- Pense a respeito das variáveis `hwy` (consumo em milhas por galão na estrada) e `displ` (tamanho do motor do carro, em litros)
+
+- O que ocorre com o consumo do carro quando o tamanho do motor em litros aumenta? Isto faz sentido de acordo com a sua intuição?
+
+```{r mpg_01}
+# carregando o pacote ggplot2
+
+library(ggplot2)
+
+# grafico de dispersao hwy x displ
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point()
+```
+
+### Exercícios
+
+- Veja o código abaixo. Imagine o que ele fará antes de rodá-lo no `R`. O resultado esperado ocorreu? 
+
+```{r mpg_02, eval = FALSE}
+# <preencha com um comentario apropriado>
+
+ggplot(mpg, aes(x = displ, y = hwy))
+```
+
+- Crie um gráfico de dispersão relacionando consumo na estrada com número de cilindros. O que é possível perceber?
+
+```{r mpg_03, eval = FALSE}
+# grafico de dispersao <???>
+```
+
+- Crie um gráfico de dispersão relacionando class versus drv. O que este gráfico está nos mostrando? Por que ele não é útil? 
+
+```{r mpg_04, eval = FALSE}
+# grafico de dispersao <???>
+```
+
+## Cores: Adicionando Um Pouco de Sofisticação
+
+- Veja que há alguns pontos destacados em vermelho na imagem abaixo. Parece que eles fogem do comportamento linear dos outros pontos do conjunto de dados.
+
+```{r mpg_05, echo = FALSE}
+# grafico de dispersao hwy x displ
+
+mpg %>%
+  mutate(ind = ifelse(class == "2seater", "2seater", "other")) %>%
+  ggplot(., aes(x = displ, y = hwy, colour = ind)) +
+  geom_point() +
+  theme(legend.position = "none") +
+  scale_colour_manual(values = c("red", "black"))
+```
+
+- Note que somos capazes de gerar um gráfio mais sofisticado se alterarmos um pouco o código que utilizamos até o momento
+
+```{r mpg_06}
+# grafico de dispersao hwy x displ com legenda
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(colour = class))
+```
+
+- Não estamos limitados a utilizarmos apenas cores para identificar os diferentes tipos de carros considerados nesta análise
+
+```{r mpg_07}
+# grafico de dispersao hwy x displ com legenda
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(size = class))
+```
+
+```{r mpg_08}
+# grafico de dispersao hwy x displ com legenda
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(shape = class))
+```
+
+```{r mpg_09}
+# grafico de dispersao hwy x displ com legenda
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(alpha = class))
+```
+
+### Exercícios
+
+- O que está de errado no gráfico abaixo? Por que os pontos não ficaram azuis? Como resolver este problema?
+
+```{r mpg_10}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(colour = "blue"))
+```
+
+- Podemos dividir as variáveis de um conjunto de dados em dois grandes grupos: variáveis quantitativas (números) e variáveis categóricas (nomes). Quais variáveis do conjunto de dados `mpg` pertencem a cada grupo? Utilize `?mpg` e `str(mpg)` para tirar as suas conclusões.
+
+- Repita o gráfico de dispersão de `hwy` versus `displ`, mas desta vez mapeie uma variável quantitativa para a cor. Qual é a diferença que podemos perceber?
+
+
+
+## _Facets_: Como Fazer Gráficos em Painéis
+
+- Da lista dos sete componente principais de cada gráfico, nós já vimos como trabalhar com dados, estética e geometria
+
+- Ainda nos falta ver como adicionar _facets_, estatística, coordenadas e tema ao nosso produto
+
+- Começaremos pelos _facets_
+
+- Veja o gráfico abaixo, dividido em painéis
+
+```{r mpg_11}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  facet_wrap(~ class)
+```
+
+- Note que conseguimos melhorar a visualização do nosso conjunto de dados em comparação ao que tínhamos antes (ao menos está mais fácil de visualizar cada nível da variável `class`)
+
+- É possível alterar a organização dos painéis muito facilmente
+
+```{r mpg_12}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  facet_wrap(~ class, ncol = 2)
+```
+
+
+### Exercícios
+
+- O que ocorre se uma variável contínua for utilizada para criar as facetas?
+
+- Explique o que o código abaixo faz. 
+
+```{r mpg_13, eval = FALSE}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  facet_wrap(~ class + drv, ncol = 2)
+```
+
+- Os exemplos com os quais trabalhamos inseriram a visualização de uma terceira variável em nossos gráficos utilizando cores e facetas. Qual destes dois métodos é mais indicado se a terceira variável for 
+
+  - categórica?
+  
+  - quantitativa? 
+  
+
+
+## Adicionando outras Geometrias aos Nossos Gráficos
+  
+- O que os gráficos abaixo tem em comum? E o que é diferente entre eles? Como explicar o que está ocorrendo no gráfico de baixo?
+
+```{r mpg_14}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point()
+```
+
+```{r mpg_15}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_smooth()
+```
+
+- O gráfico de baixo utiliza uma curva para descrever o comportamento dos dados
+
+- Com ele, é mais fácil avaliar tendências
+
+- Perceba o que ocorre se quisermos separar os carros de acordo com seu tipo de tração:
+
+```{r mpg_16}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(colour = drv))
+```
+
+```{r mpg_17}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_smooth(aes(colour = drv))
+```
+
+- Qual das opções lhe parece mais fácil de interpretar?
+
+- Note que o `ggplot2` nos permite combinar geometrias diferentes no mesmo gráfico:
+
+```{r mpg_18}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(colour = drv)) +
+  geom_smooth(aes(colour = drv))
+```
+
+- É possível simplificar o código anterior colocando uma declaração global para as cores tanto dos pontos, quanto das curvas de tendência:
+
+```{r mpg_19}
+ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
+  geom_point() +
+  geom_smooth()
+```
+
+- Mas as não é necessário manter as separações em grupos iguais nas duas camadas; veja no códiga abaixo como separamos os pontos de acordo com a tração, mas mantivemos a tendência global da relação entre `hwy` e `displ` 
+
+```{r mpg_20}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(colour = drv)) +
+  geom_smooth()
+```
+
+- Embora não seja recomendável, é possível colocar as três tendências particulares e a tendência global no mesmo gráfico
+
+```{r mpg_21}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(colour = drv)) +
+  geom_smooth(aes(colour = drv)) + 
+  geom_smooth()
+```
+
+### Exercícios
+
+- Descubra o tipo de `geom` adequado para construir
+  - Um gráfico de linha
+  - Um boxplot
+  - Um histograma
+
+- Sem rodar, descreva o que o código abaixo fará. Rode-o em seguida para ver se a sua intuição estava correta.
+
+```{r mpg_22}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+```
+
+- Escreva o código necessário para recriar os gráficos abaixo
+
+```{r mpg_23, echo = FALSE}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth(se = FALSE, colour = "black")
+```
+
+```{r mpg_24, echo = FALSE}
+ggplot(mpg, aes(x = displ, y = hwy, colour = cty)) +
+  geom_point() +
+  geom_smooth()
+```
+
+## Personalizando o Gráfico com um Tema
+
+- Vamos supor que a resultado estético obtido com os gráficos que obtivemos até agora não seja do seu agrado
+
+- O fundo cinza não te agrada
+
+- É muito fácil alterar isso aplicando temas aos nossos gráficos
+
+```{r mpg_25}
+ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
+  geom_point()
+```
+
+```{r mpg_26}
+ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
+  geom_point() +
+  theme_bw()
+```
+
+```{r mpg_27}
+ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
+  geom_point() +
+  theme_minimal()
+```
+
+```{r mpg_28}
+ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
+  geom_point() +
+  theme_dark()
+```
+
+- Além da personalização do tema do gráfico, é possível alterar a paleta de cores usada em sua construção:
+
+```{r mpg_29}
+ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
+  geom_point()
+```
+
+```{r mpg_30}
+ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
+  geom_point() +
+  scale_colour_brewer(palette = "Dark2")
+```
+
+```{r mpg_31}
+ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
+  geom_point() +
+  scale_colour_brewer(palette = "Reds")
+```
+
+```{r mpg_32}
+ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
+  geom_point() +
+  scale_colour_brewer(palette = "Pastel1")
+```
+
+- Como não poderia deixar de ser, é possível combinar temas e paletas em um mesmo gráfico
+
+### Exercícios
+
+- Utilize o comando `?theme_bw` para encontrar outros temas disponíveis
+
+- Utilize o comando `?scale_colour_brewer` para encontrar outras paletas de cores disponíveis
+
+- Crie uma visualização para o gráfico de dispersão de `hwy` versus `displ` com um tema e uma paleta de cores que ainda não foi vista
+
+
+ 
+# Manipulação e Processamento de Dados
+ 
+- Perceba que, até o momento, deixamos de fora gráficos de barra
+
+- Ao contrário dos gráficos de dispersão, não é possível construí-los sem pré-processar os dados antes
+
+- Utilizaremos um pacote chamado `dplyr` para realizar esta tarefa
+
+- Foi lançado por Hadley Wickham, Romain François, Lionel Henry e Kirill Müller em 2014
+
+- Segue as ideias principais do `ggplot2`: criar uma gramática de análise de dados, como se comandos fossem verbos e frases pudessem ser construídas a partir deles
+
+- Isto nos permite manipular dados para extrairmos informações tão complexas quanto quisermos
+
+- O código utilizado para fazer estas manipulações é, em geral, mais limpo e enxuto do que os códigos tradicionais do `R`
+
+- Código mais limpo é mais fácil de ser auditado por outras pessoas e por nós mesmos no futuro, quando tivermos que procurar bugs
+
+- O `dplyr` possui funções bastante simples
+
+- Entretanto, quando combinadas, elas produzem uma infinidade de resultados diferentes
+
+- Algumas destas funções são as seguintes:
+  - `select`: seleciona variáveis baseada em seus nomes (colunas)
+  - `filter`: selecionas casos baseados em seus valores (linhas)
+  - `summarise`: resume múltiplos valores a apenas um
+  - `group_by`: agrupa dados para realizar operações
+  - `arrange`: muda a ordem das linhas
+
+- Vamos ver como utilizar as funções `select` e `filter`
+
+- O funcionamento básico delas nos ajudará a entender como utilizar as demais funções do pacote
+
+```{r mpg_33}
+# carregando o pacote dplyr
+
+library(dplyr)
+
+# verificando o conjunto de dados mpg
+
+head(mpg)
+
+head(mpg, 10)
+```
+
+- Note que `mpg` possui 11 colunas
+
+- Suponha que desejamos trabalhar apenas com as colunas `manufacturer`, `hwy` e `displ`
+
+- Para isso, vamos usar a função `select`:
+
+```{r mpg_34}
+mpg %>%
+  select(manufacturer, hwy, displ)
+```
+
+- Note que uma outra função foi introduzida acima
+
+- A função `%>%` se chama _pipe_ e serve para levar o output de um comando para outro
+
+- Suponha agora que desejamos obter apenas as informações sobre os carros da chevrolet
+
+- Para isto, utilizaremos a função `filter`:
+
+```{r mpg_35}
+mpg %>%
+  filter(manufacturer == "chevrolet")
+```
+
+- Logicamente, `filter` e `select` podem ser combinadas em uma sequência de comandos
+
+- Qual será o resultado do código abaixo? Pense um pouco a respeito e depois rode-o para verificar se a sua hipótese estava correta
+
+```{r mpg_36, eval = FALSE}
+mpg %>%
+  filter(manufacturer == "chevrolet") %>%
+  select(manufacturer, hwy, displ)
+```
+
+- Para aplicar funções estatísticas nas colunas do conjunto de dados, utilizamos a função `summarise`
+
+```{r mpg_37}
+mpg %>%
+  summarise(media_hwy = mean(hwy), 
+            media_displ = mean(displ))
+```
+
+- A função `summarise` fica mais interessante se utilizada em conjunto com a função `group_by`:
+
+```{r mpg_38}
+mpg %>%
+  group_by(manufacturer) %>%
+  summarise(media_hwy = mean(hwy), 
+            media_displ = mean(displ))
+```
+
+- Perceba que o output anterior foi dado de acordo com a ordem alfabética dos fabricantes
+
+- Mas e se quisermos classificar os fabricantes pela média de consumo dos carros? Como proceder para encontrar o fabricante dos carros mais econômicos?
+
+- A função `arrange` serve justamente para isto:
+
+```{r mpg_39}
+mpg %>%
+  group_by(manufacturer) %>%
+  summarise(media_hwy = mean(hwy), 
+            media_displ = mean(displ)) %>%
+  arrange(media_hwy)
+```
+
+- Será que era isso mesmo que queríamos? Ou o output desejado é este que está logo abaixo? (lembre-se: queremos saber qual é o fabricante dos carros mais econômicos na estrada)
+
+```{r mpg_40}
+mpg %>%
+  group_by(manufacturer) %>%
+  summarise(media_hwy = mean(hwy), 
+            media_displ = mean(displ)) %>%
+  arrange(desc(media_hwy))
+```
+
+### Exercícios
+
+- Utilize a função `n()` para encontrar o fabricante de automóveis com mais modelos no conjunto de dados
+
+- Determine quais são os fabricantes que comercializam carros com tração traseira
+
+- Calcule as médias de consumo na estrada dos modelos de carros do ano de 1998 e mostre os cinco mais econômicos
+
+
+
+## Juntando `dplyr` e `ggplot2`
+
+- Uma das grandes vantagens de utilizar os pacotes `dplyr` e `ggplot2` juntos é que o output de um serve como input do outro
+
+- Em outras palavras, podemos processar os dados utilizando `dplyr` e utilizar o resultado deste processamento para criar um gráfico
+
+- Por exemplo, o código abaixo, que calcula o número de carros para cada tipo de tração:
+
+```{r mpg_41}
+mpg %>%
+  group_by(drv) %>%
+  summarise(qtde = n())
+```
+
+- É natural criar um gráfico de barras com este resultado
+
+- Para fazer isso, utilizamos a função `geom_col`
+
+```{r mpg_42}
+mpg %>%
+  group_by(drv) %>%
+  summarise(qtde = n()) %>%
+  ggplot(., aes(x = drv, y = qtde)) +
+  geom_col()
+```
+
+- Podemos criar uma tabela com duas variáveis descritivas simultaneamente, como `class` e `drv`
+
+```{r mpg_43}
+mpg %>%
+  group_by(class, drv) %>%
+  summarise(qtde = n()) %>%
+  ggplot(., aes(x = class, y = qtde)) +
+  geom_col()
+```
+
+- Perceba que não coneguimos identificar a variável `drv` neste gráfico
+
+- Isto ocorre porque, por padrão, o `geom_col` fazer barras empilhadas
+
+- Vamos rodar o código novamente e utilizar cores diferentes para identificar a variável `drv`:
+
+```{r mpg_44}
+mpg %>%
+  group_by(class, drv) %>%
+  summarise(qtde = n()) %>%
+  ggplot(., aes(x = class, y = qtde, fill = drv)) +
+  geom_col()
+```
+
+- Se desejarmos, podemos colocar as colunas lado a lado:
+
+```{r mpg_45}
+mpg %>%
+  group_by(class, drv) %>%
+  summarise(qtde = n()) %>%
+  ggplot(., aes(x = class, y = qtde, fill = drv)) +
+  geom_col(position = "dodge")
+```
+
+- Vamos olhar este resultado mais de perto:
+
+```{r mpg_46}
+mpg %>%
+  group_by(class, drv) %>%
+  summarise(qtde = n()) %>%
+  print(n = Inf) %>%
+  ggplot(., aes(x = class, y = qtde, fill = drv)) +
+  geom_col(position = "dodge")
+```
+
+- Algumas combinações de resultados não aparecem na tabela e, consequentemente, não vão aparecer no gráfico
+
+- Para remediar isso, utilizamos a função `complete`:
+
+```{r mpg_47}
+mpg %>%
+  group_by(class, drv) %>%
+  summarise(qtde = n()) %>%
+  ungroup() %>%
+  complete(class, drv, fill = list(qtde = 0)) %>%
+  print(n = Inf) %>%
+  ggplot(., aes(x = class, y = qtde, fill = drv)) +
+  geom_col(position = "dodge")
+```
+
+- Note que agora nosso output tem 21 linhas, em vez das 12 anteriores
+
+- O comando `complete` adicionou 9 linhas extras, com as combinações entre os níveis de `class` e `drv` que não estavam presentes anteriormente, atribuindo o valor 0 a elas
+
+- Desta forma, temos um gráfico de barras muito mais harmonioso
+
+
+## Finalização do Gráfico
+
+- Perceba que até o momento não nos precupamos em melhorar a comunicação dos nossos gráficos
+
+- Nós não alteramos os nomes dos eixos ou colocamos títulos neles
+
+- Entretanto, é necessário que tenhamos este tipo de cuidado sempre que formos apresentar nossos resultados para outras pessoas
+
+- Felizmente, a função `labs` permite que resolvamos isso rapidamente:
+
+```{r mpg_48}
+mpg %>%
+  group_by(class, drv) %>%
+  summarise(qtde = n()) %>%
+  ungroup() %>%
+  complete(class, drv, fill = list(qtde = 0)) %>%
+  ggplot(., aes(x = class, y = qtde, fill = drv)) +
+  geom_col(position = "dodge") +
+  labs(x = "Tipo de Carro", y = "Quantidade de Carros", fill = "Tração", title = "Distribuição dos Carros de Passeio de Acordo com Tipo e Tração")
+```
+
+ 
+# Aplicação
+
+- Chegou a hora de aplicar o conhecimento aprendido neste workshop
+
+- Além do conjunto `mtcars`, foi disponibilizado com este pacote um conjunto de dados chamado `gapminder`, com informações econômicas sobre vários países do mundo
+
+- Use o comando `data(gapminder)` para carregar este conjunto de dados na memória do R
+
+- Para saber o que significa cada uma das suas colunas, rode o comando `?gapminder`
+
+- Gapminder é o nome de uma fundação sem fins lucrativos, sediada em Estocolmo, que promove o desenvolvimento global sustentável
+
+- Um de seus co-fundadores, o estatístico Hans Rosling, ficou conhecido em 2010 ao apresentar na BBC um vídeo de 5 minutos demonstrando como a expectativa de vida dos países aumentou nos últimso 200 anos
+
+- [Este vídeo possui mais de 8 milhões de visualizações apenas no YouTube](https://www.youtube.com/watch?v=jbkSRLYSojo)
+
+- As questões colocadas abaixo servem como orientação para a realização de uma análise exploratória deste conjunto de dados
+
+- Não esqueça de nomear os eixos e as legendas dos gráficos produzidos
+
+1. Determine o número de observações e de variáveis presentes no conjunto de dados `gapminder`, além do tipo de cada variável
+
+```{r gapminder_01, include = FALSE}
+data(gapminder)
+str(gapminder)
+```
+
+2. Considerando apenas o ano de 2007, crie um gráfico de dispersão de Expectativa de Vida versus PIB per Capita. O que é possível perceber?
+
+```{r gapminder_02, include = FALSE}
+gapminder %>%
+  filter(ano == 2007) %>%
+  ggplot(., aes(x = pibPerCapita, y = expVida)) +
+  geom_point() +
+  labs(x = "PIB per Capita (US$)", y = "Expectativa de Vida (Anos)", title = "Relação entre Expectativa de Vida e PIB per Capita no Mundo no ano de 2007")
+```
+
+3. Vamos verificar se há alguma sugestão de influência do continente naquilo que vimos no gráfico anterior. Para isso, pinte os pontos do gráfico anterior de acordo com o continente de cada país. O que este novo gráfico nos sugere?
+
+```{r gapminder_03, include = FALSE}
+gapminder %>%
+  filter(ano == 2007) %>%
+  ggplot(., aes(x = pibPerCapita, y = expVida)) +
+  geom_point(aes(colour = continente)) +
+  labs(x = "PIB per Capita (US$)", y = "Expectativa de Vida ao Nascer", title = "Relação entre Expectativa de Vida ao Nascer e PIB per Capita no Mundo no ano de 2007", colour = "Continente")
+```
+
+4. Verificar um ano apenas é muito pouco. Isto não nos diz se houve alguma evolução na expectativa de vida nos países durante a história. Vamos verificar se, ao menos na América do Sul, a expectativa de vida aumentou entre 1952 e 2007. Primeiramente, vamos preparar o conjunto de dados para análise, mantendo apenas os anos e os países que nos interessam:
+
+```{r gapminder_04a}
+anos   <- seq(from = 1952, to = 2007, by = 5)
+paises <- c("Argentina", "Bolivia", "Brazil", "Chile", 
+  "Colombia", "Equador", "Paraguay", "Peru", "Uruguay", 
+  "Venezuela")
+
+gapminder %>%
+  filter(ano %in% anos) %>%
+  filter(pais %in% paises)
+```
+
+Junte o resultado da filtragem acima com a função `geom_line` para criar um gráfico de linha que mostre esta evolução. O que é possível concluir a partir deste gráfico?
+
+```{r gapminder_04, include = FALSE}
+gapminder %>%
+  filter(ano %in% anos) %>%
+  filter(pais %in% paises) %>%
+  ggplot(., aes(x=ano, y=expVida, colour=pais)) +
+  geom_line() +
+  labs(x = "Ano", y = "Expectativa de Vida ao Nascer", 
+    colour = "Países") +
+  scale_x_continuous(breaks = anos)
+```
+
+5. Crie uma tabela com a expectativa de vida média de cada continente nos anos de 1952 a 2007, com intervalo 5 anos. Exiba todas as linhas da sua tabela.
+
+```{r gapminder_05, include = FALSE}
+gapminder %>%
+  filter(ano %in% anos) %>%
+  group_by(continente, ano) %>%
+  summarise(Media = mean(expVida)) %>%
+  print(n = Inf)
+```
+
+6. Escreva o código que replique o gráfico abaixo. Dica: ele foi obtido através do output da tabela do exercício anterior.
+
+```{r gapminder_06a, echo = FALSE}
+gapminder %>%
+  filter(ano %in% anos) %>%
+  group_by(continente, ano) %>%
+  summarise(Media = mean(expVida)) %>%
+  ggplot(., aes(x = ano, y = Media, fill = continente)) +
+  geom_col(position = "dodge") +
+  labs(x = "Ano", y = "Média da Expectativa de Vida ao Nascer", fill = "Continente") +
+  scale_x_continuous(breaks = seq(from = 1952, to = 2007, by = 5))
+```
+
+```{r gapminder_06, include = FALSE, eval = FALSE}
+gapminder %>%
+  filter(ano %in% anos) %>%
+  group_by(continente, ano) %>%
+  summarise(Media = mean(expVida)) %>%
+  ggplot(., aes(x = ano, y = Media, fill = continente)) +
+  geom_col(position = "dodge") +
+  labs(x = "Ano", y = "Média da Expectativa de Vida ao Nascer", fill = "Continente") +
+  scale_x_continuous(breaks = seq(from = 1952, to = 2007, by = 5))
+```
+
+7. Repita o gráfico do exercício anterior, mas em vez de barras, faça-o com linhas. Dentre as visualizações criadas nos exercícios 6 e 7, qual é a sua preferida? Por quê?
+
+```{r gapminder_07, include = FALSE}
+gapminder %>%
+  filter(ano %in% anos) %>%
+  group_by(continente, ano) %>%
+  summarise(Media = mean(expVida)) %>%
+  ggplot(., aes(x = ano, y = Media, colour = continente)) +
+  geom_line() +
+  labs(x = "Ano", y = "Média da Expectativa de Vida ao Nascer", colour = "Continente") +
+  scale_x_continuous(breaks = seq(from = 1952, to = 2007, by = 5))
+```
+
+8. Qual a sua interpretação a respeito do gráfico abaixo?
+
+```{r gapminder_08}
+gapminder %>%
+  filter(ano == 2007) %>%
+  ggplot(., aes(x=continente, y=expVida, fill=continente)) +
+  geom_violin() +
+  labs(x = "Continente", y = "Expectativa de Vida ao Nascer",  fill = "Continente")
+```
+
+9. Refaça o gráfico anterior para os anos entre 1952 e 2007, com intervalo de 5 anos, dividindo-o em painéis (ou seja, crie um painel para cada ano). O que o resultado obtido nos sugere?
+
+```{r, include = FALSE}
+anos   <- seq(from = 1952, to = 2007, by = 5)
+
+gapminder %>%
+  filter(ano %in% anos) %>%
+  ggplot(., aes(x=continente, y=expVida, fill=continente)) +
+  geom_violin() +
+  labs(x="Continente", y="Expectativa de Vida ao Nascer", 
+    fill="Continente") +
+  facet_wrap(~ ano, nrow=3) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+```
+
+10. Juntando tudo o que vimos até o momento com os gráficos criados, o que é possível concluir a respeito da expectativa de vida mundial?
+
+  a) Como ela evoluiu durante o período analisado? 
+  
+  b) A evolução foi diferente entre os continentes?
+  
+  c) Há algum continente cuja expectativa de vida seja particularmente desigual?
+  
+  d) Descreva como se comportou a evolução da expectativa de vida das Américas.
+
+
+
+
+# E Agora? Como Continuar? {-}
+
+- Stack Overflow em Português: https://pt.stackoverflow.com/questions/tagged/r
+
+- Lista Brasileira Oficial de Discussão do Programa R: http://r-br.2285057.n4.nabble.com/
+
+- Falem com seus coordenadores de curso e peçam disciplinas para o Departamento de Estatística
+
