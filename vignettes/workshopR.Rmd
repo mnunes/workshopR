@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Preparação Necessária para Acompanhar este Workshop {-}
+## Preparação Necessária para Acompanhar este Workshop {-}
 
 - Instale o `R`: https://cran.r-project.org/
 
@@ -43,7 +43,7 @@ vignette("workshopR")
 ```
 
 
-# Apresentação {-}
+## Apresentação {-}
 
 - Marcus Nunes, professor do Departamento de Estatística da UFRN
 
@@ -61,7 +61,7 @@ vignette("workshopR")
 
 
 
-# Conteúdo do Workshop {-}
+## Conteúdo do Workshop {-}
 
 1. Reprodutibilidade nas pesquisas científica e aplicada
  
@@ -74,7 +74,7 @@ vignette("workshopR")
 5. Aplicação
 
 
-# Reprodutibilidade nas Pesquisas Científica e Aplicada
+## Reprodutibilidade nas Pesquisas Científica e Aplicada
 
 - Há muitos programas capazes de realizar análises estatísticas
 
@@ -95,7 +95,7 @@ vignette("workshopR")
 - Durante este workshop iremos começar a arranhar a superfície deste oceano de dados que temos disponível no mundo atual
 
 
-# R, RStudio e seu Ambiente de Programação
+## R, RStudio e seu Ambiente de Programação
 
 - Após abrir o RStudio, é possível ver uma imagem parecida com essa:
 
@@ -117,7 +117,7 @@ vignette("workshopR")
 
 
 
-# Gráficos Utilizando o Pacote `ggplot2`
+## Gráficos Utilizando o Pacote `ggplot2`
 
 - `ggplot2` é um pacote de visualização de dados
 
@@ -133,7 +133,7 @@ vignette("workshopR")
 
 
 
-## Sintaxe Básica
+### Sintaxe Básica
 
 - O `ggplot2` exige que os dados a serem plotados estejam em um data frame
 
@@ -187,7 +187,7 @@ str(mpg)
 
 
 
-## Primeiro Gráfico
+### Primeiro Gráfico
 
 - Nosso primeiro gráfico será feito a partir do conjunto de dados `mpg`
 
@@ -206,7 +206,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point()
 ```
 
-### Exercícios
+#### Exercícios
 
 - Veja o código abaixo. Imagine o que ele fará antes de rodá-lo no `R`. O resultado esperado ocorreu? 
 
@@ -228,7 +228,7 @@ ggplot(mpg, aes(x = displ, y = hwy))
 # grafico de dispersao <???>
 ```
 
-## Cores: Adicionando Um Pouco de Sofisticação
+### Cores: Adicionando Um Pouco de Sofisticação
 
 - Veja que há alguns pontos destacados em vermelho na imagem abaixo. Parece que eles fogem do comportamento linear dos outros pontos do conjunto de dados.
 
@@ -275,7 +275,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(aes(alpha = class))
 ```
 
-### Exercícios
+#### Exercícios
 
 - O que está de errado no gráfico abaixo? Por que os pontos não ficaram azuis? Como resolver este problema?
 
@@ -290,7 +290,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 
 
-## _Facets_: Como Fazer Gráficos em Painéis
+### _Facets_: Como Fazer Gráficos em Painéis
 
 - Da lista dos sete componente principais de cada gráfico, nós já vimos como trabalhar com dados, estética e geometria
 
@@ -317,7 +317,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 ```
 
 
-### Exercícios
+#### Exercícios
 
 - O que ocorre se uma variável contínua for utilizada para criar as facetas?
 
@@ -337,7 +337,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   
 
 
-## Adicionando outras Geometrias aos Nossos Gráficos
+### Adicionando outras Geometrias aos Nossos Gráficos
   
 - O que os gráficos abaixo tem em comum? E o que é diferente entre eles? Como explicar o que está ocorrendo no gráfico de baixo?
 
@@ -402,7 +402,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_smooth()
 ```
 
-### Exercícios
+#### Exercícios
 
 - Descubra o tipo de `geom` adequado para construir
   - Um gráfico de linha
@@ -431,7 +431,7 @@ ggplot(mpg, aes(x = displ, y = hwy, colour = cty)) +
   geom_smooth()
 ```
 
-## Personalizando o Gráfico com um Tema
+### Personalizando o Gráfico com um Tema
 
 - Vamos supor que a resultado estético obtido com os gráficos que obtivemos até agora não seja do seu agrado
 
@@ -489,7 +489,7 @@ ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
 
 - Como não poderia deixar de ser, é possível combinar temas e paletas em um mesmo gráfico
 
-### Exercícios
+#### Exercícios
 
 - Utilize o comando `?theme_bw` para encontrar outros temas disponíveis
 
@@ -499,7 +499,7 @@ ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
 
 
  
-# Manipulação e Processamento de Dados
+## Manipulação e Processamento de Dados
  
 - Perceba que, até o momento, deixamos de fora gráficos de barra
 
@@ -619,7 +619,7 @@ mpg %>%
   arrange(desc(media_hwy))
 ```
 
-### Exercícios
+#### Exercícios
 
 - Utilize a função `n()` para encontrar o fabricante de automóveis com mais modelos no conjunto de dados
 
@@ -629,7 +629,7 @@ mpg %>%
 
 
 
-## Juntando `dplyr` e `ggplot2`
+### Juntando `dplyr` e `ggplot2`
 
 - Uma das grandes vantagens de utilizar os pacotes `dplyr` e `ggplot2` juntos é que o output de um serve como input do outro
 
@@ -722,7 +722,7 @@ mpg %>%
 - Desta forma, temos um gráfico de barras muito mais harmonioso
 
 
-## Finalização do Gráfico
+### Finalização do Gráfico
 
 - Perceba que até o momento não nos precupamos em melhorar a comunicação dos nossos gráficos
 
@@ -744,7 +744,7 @@ mpg %>%
 ```
 
  
-# Aplicação
+## Aplicação
 
 - Chegou a hora de aplicar o conhecimento aprendido neste workshop
 
@@ -902,13 +902,13 @@ gapminder %>%
 
 
 
-# E Agora? Como Continuar? {-}
+## E Agora? Como Continuar? {-}
 
 - Stack Overflow em Português: https://pt.stackoverflow.com/questions/tagged/r
 
 - Lista Brasileira Oficial de Discussão do Programa R: http://r-br.2285057.n4.nabble.com/
 
-- Falem com seus coordenadores de curso e peçam disciplinas para o Departamento de Estatística
+- Falem com seus coordenadores de curso e peçam disciplinas de Ciência de Dados para o Departamento de Estatística
 
 
 
