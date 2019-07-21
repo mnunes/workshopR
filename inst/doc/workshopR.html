@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -96,7 +97,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -406,7 +407,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li><p>coordenadas: informa onde o gráfico será construído, se em coordenadas cartesianas ou polares, por exemplo</p></li>
 <li><p>tema: camada referente à visualização geral do gráfico</p></li>
 </ul></li>
-<li><p>Trabalharemos com o conjunto de dados <code>mtcars</code></p></li>
+<li><p>Trabalharemos com o conjunto de dados <code>mpg</code></p></li>
 <li><p>Originalmente, este conjunto de dados faz parte do pacote <code>tidyverse</code></p></li>
 <li><p>Carregue este arquivo na memória do <code>R</code> através do comando</p></li>
 </ul>
@@ -424,7 +425,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; Help on topic &#39;mpg&#39; was found in the following packages:</span></span>
 <span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; </span></span>
 <span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt;   Package               Library</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt;   workshopR             /private/var/folders/gc/8hj8csfj73j4l4w93r1f0_vw0000gn/T/RtmpzcEyTb/temp_libpath34e46d66ec1c</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt;   workshopR             /Library/Frameworks/R.framework/Versions/3.6/Resources/library</span></span>
 <span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt;   ggplot2               /Library/Frameworks/R.framework/Versions/3.6/Resources/library</span></span>
 <span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; </span></span>
 <span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; </span></span>
@@ -1127,6 +1128,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </ul>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

@@ -161,7 +161,7 @@ vignette("workshopR")
 
   - tema: camada referente à visualização geral do gráfico
 
-- Trabalharemos com o conjunto de dados `mtcars`
+- Trabalharemos com o conjunto de dados `mpg`
 
 - Originalmente, este conjunto de dados faz parte do pacote `tidyverse`
 
