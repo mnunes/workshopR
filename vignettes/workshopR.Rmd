@@ -385,7 +385,7 @@ ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
   geom_smooth()
 ```
 
-- Mas as não é necessário manter as separações em grupos iguais nas duas camadas; veja no códiga abaixo como separamos os pontos de acordo com a tração, mas mantivemos a tendência global da relação entre `hwy` e `displ` 
+- Mas não é necessário manter as separações em grupos iguais nas duas camadas; veja no código abaixo como separamos os pontos de acordo com a tração, mas mantivemos a tendência global da relação entre `hwy` e `displ` 
 
 ```{r mpg_20}
 ggplot(mpg, aes(x = displ, y = hwy)) +
@@ -414,7 +414,8 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 ```{r mpg_22}
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point() +
-  geom_smooth(se = FALSE)
+  geom_smooth() +
+  facet_wrap(~ drv)
 ```
 
 - Escreva o código necessário para recriar os gráficos abaixo
@@ -435,7 +436,7 @@ ggplot(mpg, aes(x = displ, y = hwy, colour = cty)) +
 
 - Vamos supor que a resultado estético obtido com os gráficos que obtivemos até agora não seja do seu agrado
 
-- O fundo cinza não te agrada
+- Por exemplo, suponha que o fundo cinza não te agrada
 
 - É muito fácil alterar isso aplicando temas aos nossos gráficos
 
@@ -507,7 +508,7 @@ ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
 
 - Utilizaremos um pacote chamado `dplyr` para realizar esta tarefa
 
-- Foi lançado por Hadley Wickham, Romain François, Lionel Henry e Kirill Müller em 2014
+- Este pacote foi lançado por Hadley Wickham, Romain François, Lionel Henry e Kirill Müller em 2014
 
 - Segue as ideias principais do `ggplot2`: criar uma gramática de análise de dados, como se comandos fossem verbos e frases pudessem ser construídas a partir deles
 
@@ -526,7 +527,7 @@ ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
   - `filter`: selecionas casos baseados em seus valores (linhas)
   - `summarise`: resume múltiplos valores a apenas um
   - `group_by`: agrupa dados para realizar operações
-  - `arrange`: muda a ordem das linhas
+  - `arrange`: altera a ordem das linhas
 
 - Vamos ver como utilizar as funções `select` e `filter`
 
@@ -643,7 +644,7 @@ mpg %>%
   summarise(qtde = n())
 ```
 
-- É natural criar um gráfico de barras com este resultado
+- É natural querer criar um gráfico de barras com este resultado
 
 - Para fazer isso, utilizamos a função `geom_col`
 
@@ -665,9 +666,9 @@ mpg %>%
   geom_col()
 ```
 
-- Perceba que não coneguimos identificar a variável `drv` neste gráfico
+- Perceba que não conseguimos identificar a variável `drv` neste gráfico
 
-- Isto ocorre porque, por padrão, o `geom_col` fazer barras empilhadas
+- Isto ocorre porque, por padrão, o `geom_col` faz barras empilhadas
 
 - Vamos rodar o código novamente e utilizar cores diferentes para identificar a variável `drv`:
 
@@ -724,7 +725,7 @@ mpg %>%
 
 ### Finalização do Gráfico
 
-- Perceba que até o momento não nos precupamos em melhorar a comunicação dos nossos gráficos
+- Perceba que até o momento não nos preocupamos em melhorar a comunicação dos nossos gráficos
 
 - Nós não alteramos os nomes dos eixos ou colocamos títulos neles
 
@@ -740,7 +741,7 @@ mpg %>%
   complete(class, drv, fill = list(qtde = 0)) %>%
   ggplot(., aes(x = class, y = qtde, fill = drv)) +
   geom_col(position = "dodge") +
-  labs(x = "Tipo de Carro", y = "Quantidade de Carros", fill = "Tração", title = "Distribuição dos Carros de Passeio de Acordo com Tipo e Tração")
+  labs(x = "Tipo de Carro", y = "Quantidade de Carros", fill = "Tração", title = "Carros de Passeio: Tipo e Tração")
 ```
 
  
@@ -748,7 +749,7 @@ mpg %>%
 
 - Chegou a hora de aplicar o conhecimento aprendido neste workshop
 
-- Além do conjunto `mtcars`, foi disponibilizado com este pacote um conjunto de dados chamado `gapminder`, com informações econômicas sobre vários países do mundo
+- Além do conjunto `mpg`, foi disponibilizado com este pacote um conjunto de dados chamado `gapminder`, com informações econômicas sobre vários países do mundo
 
 - Use o comando `data(gapminder)` para carregar este conjunto de dados na memória do R
 
@@ -756,7 +757,7 @@ mpg %>%
 
 - Gapminder é o nome de uma fundação sem fins lucrativos, sediada em Estocolmo, que promove o desenvolvimento global sustentável
 
-- Um de seus co-fundadores, o estatístico Hans Rosling, ficou conhecido em 2010 ao apresentar na BBC um vídeo de 5 minutos demonstrando como a expectativa de vida dos países aumentou nos últimso 200 anos
+- Um de seus co-fundadores, o estatístico Hans Rosling, ficou conhecido em 2010 ao apresentar na BBC um vídeo de 5 minutos demonstrando como a expectativa de vida dos países aumentou nos últimos 200 anos
 
 - [Este vídeo possui mais de 8 milhões de visualizações apenas no YouTube](https://www.youtube.com/watch?v=jbkSRLYSojo)
 
