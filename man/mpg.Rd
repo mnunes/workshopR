@@ -4,7 +4,7 @@
 \title{Informacoes de consumo de combustivel sobre carros de passeio}
 \format{Um data frame com informacoes a respeito de 234 carros com as seguintes 11 variaveis:
   \describe{
-    \item{\code{manufacturer}}{fabicante do automovel}
+    \item{\code{manufacturer}}{fabricante do automovel}
     \item{\code{model}}{modelo do carro}
     \item{\code{displ}}{deslocamento do motor em litros}
     \item{\code{year}}{ano de fabricacao}
