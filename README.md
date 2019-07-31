@@ -12,6 +12,8 @@ A fim de facilitar o entendimento dos participantes do workshop, decidi criar um
 
 - Instale o RStudio: [https://www.rstudio.com/products/rstudio/download/](https://www.rstudio.com/products/rstudio/download/)
 
+- Se o seu computador roda Windows, também é necessário instalar o programa [Rtools](https://cran.r-project.org/bin/windows/Rtools/)
+
 - Com o RStudio aberto, instale o material do workshop:
 
     ```install.packages("devtools")```
