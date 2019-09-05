@@ -1,6 +1,6 @@
 # Workshop de R: Levando a Ciência de Dados para Todos
 
-Este é o repositório para os arquivos do meu workshop de iniciação ao R.
+Este é o repositório para os arquivos do meu workshop de iniciação ao R. É um curso básico, no qual serão vistos apenas conceitos elementares de visualização e de processamento de dados.
 
 > **Workshop de R: Levando a Ciência de Dados para Todos**
 > 
@@ -29,7 +29,7 @@ Se tudo correr bem, os comandos
     library(workshopR)
     vignette("workshopR")
 
-vão abrir o material didático utilizado durante o workshop. 
+vão abrir o material didático utilizado durante o workshop. O material didático pode ser pré-visualizado [neste link](https://htmlpreview.github.io/?https://github.com/mnunes/workshopR/blob/master/inst/doc/workshopR.html).
 
 <!---
 Há alguns exercícios ao final deste material. As respostas dos exercícios estão [neste link](https://github.com/mnunes/workshopR/blob/master/exercicios.R) (em breve).
