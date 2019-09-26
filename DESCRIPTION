@@ -12,5 +12,5 @@ LazyData: true
 VignetteBuilder: knitr
 URL: https://github.com/mnunes/workshopR
 BugReports: https://github.com/mnunes/workshopR/issues
-Imports: tidyverse, ggplot2, dplyr, knitr, rmarkdown
+Imports: tidyverse, knitr, rmarkdown
 RoxygenNote: 6.1.1
