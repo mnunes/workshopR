@@ -31,9 +31,7 @@ Se tudo correr bem, os comandos
 
 vão abrir o material didático utilizado durante o workshop. O material didático pode ser pré-visualizado [neste link](https://htmlpreview.github.io/?https://github.com/mnunes/workshopR/blob/master/inst/doc/workshopR.html).
 
-<!---
-Há alguns exercícios ao final deste material. As respostas dos exercícios estão [neste link](https://github.com/mnunes/workshopR/blob/master/exercicios.R) (em breve).
--->
+Há alguns exercícios ao final deste material. As respostas dos exercícios estão [neste link](https://github.com/mnunes/workshopR/blob/master/inst/doc/exercicios.R).
 
 ## Referências
 
