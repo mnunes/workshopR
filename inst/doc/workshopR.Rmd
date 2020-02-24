@@ -208,7 +208,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 #### Exercícios
 
-- Veja o código abaixo. Imagine o que ele fará antes de rodá-lo no `R`. O resultado esperado ocorreu? 
+1. Veja o código abaixo. Imagine o que ele fará antes de rodá-lo no `R`. O resultado esperado ocorreu? 
 
 ```{r mpg_02, eval = FALSE}
 # <preencha com um comentario apropriado>
@@ -216,13 +216,13 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 ggplot(mpg, aes(x = displ, y = hwy))
 ```
 
-- Crie um gráfico de dispersão (ou seja, utilizando `geom_point()`) relacionando consumo na estrada com número de cilindros. O que é possível perceber?
+2. Crie um gráfico de dispersão (ou seja, utilizando `geom_point()`) relacionando consumo na estrada com número de cilindros. O que é possível perceber?
 
 ```{r mpg_03, eval = FALSE}
 # grafico de dispersao <???>
 ```
 
-- Crie um gráfico de dispersão relacionando class versus drv. O que este gráfico está nos mostrando? Por que ele não é útil? 
+3. Crie um gráfico de dispersão relacionando class versus drv. O que este gráfico está nos mostrando? Por que ele não é útil? 
 
 ```{r mpg_04, eval = FALSE}
 # grafico de dispersao <???>
@@ -277,16 +277,16 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 #### Exercícios
 
-- O que está de errado no gráfico abaixo? Por que os pontos não ficaram azuis? Como resolver este problema?
+4. O que está de errado no gráfico abaixo? Por que os pontos não ficaram azuis? Como resolver este problema?
 
 ```{r mpg_10}
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(aes(colour = "blue"))
 ```
 
-- Podemos dividir as variáveis de um conjunto de dados em dois grandes grupos: variáveis quantitativas (números) e variáveis categóricas (nomes). Quais variáveis do conjunto de dados `mpg` pertencem a cada grupo? Utilize `?mpg` e `str(mpg)` para tirar as suas conclusões.
+5. Podemos dividir as variáveis de um conjunto de dados em dois grandes grupos: variáveis quantitativas (números) e variáveis categóricas (nomes). Quais variáveis do conjunto de dados `mpg` pertencem a cada grupo? Utilize `?mpg` e `str(mpg)` para tirar as suas conclusões.
 
-- Repita o gráfico de dispersão de `hwy` versus `displ`, mas desta vez mapeie uma variável quantitativa para a cor. Qual é a diferença que podemos perceber?
+6. Repita o gráfico de dispersão de `hwy` versus `displ`, mas desta vez mapeie uma variável quantitativa para a cor. Qual é a diferença que podemos perceber?
 
 
 
@@ -319,9 +319,9 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 #### Exercícios
 
-- O que ocorre se uma variável contínua for utilizada para criar as facetas?
+7. O que ocorre se uma variável contínua for utilizada para criar as facetas?
 
-- Explique o que o código abaixo faz. 
+8. Explique o que o código abaixo faz. 
 
 ```{r mpg_13, eval = FALSE}
 ggplot(mpg, aes(x = displ, y = hwy)) +
@@ -329,7 +329,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   facet_wrap(~ class + drv, ncol = 2)
 ```
 
-- Os exemplos com os quais trabalhamos inseriram a visualização de uma terceira variável em nossos gráficos utilizando cores e facetas. Qual destes dois métodos é mais indicado se a terceira variável for 
+9. Os exemplos com os quais trabalhamos inseriram a visualização de uma terceira variável em nossos gráficos utilizando cores e facetas. Qual destes dois métodos é mais indicado se a terceira variável for 
 
   - categórica (`"char"`)?
   
@@ -404,12 +404,12 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 #### Exercícios
 
-- Descubra o tipo de `geom` adequado para construir
+10. Descubra o tipo de `geom` adequado para construir
   - Um gráfico de linha
   - Um boxplot
   - Um histograma
 
-- Sem rodar, descreva o que o código abaixo fará. Rode-o em seguida para ver se a sua intuição estava correta.
+11. Sem rodar, descreva o que o código abaixo fará. Rode-o em seguida para ver se a sua intuição estava correta.
 
 ```{r mpg_22, eval = FALSE}
 ggplot(mpg, aes(x = displ, y = hwy)) +
@@ -418,7 +418,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   facet_wrap(~ drv)
 ```
 
-- Escreva o código necessário para recriar os gráficos abaixo
+12. Escreva o código necessário para recriar os gráficos abaixo
 
 ```{r mpg_23, echo = FALSE}
 ggplot(mpg, aes(x = displ, y = hwy)) +
@@ -492,11 +492,11 @@ ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
 
 #### Exercícios
 
-- Utilize o comando `?theme_bw` para encontrar outros temas disponíveis
+13. Utilize o comando `?theme_bw` para encontrar outros temas disponíveis
 
-- Utilize o comando `?scale_colour_brewer` para encontrar outras paletas de cores disponíveis
+14. Utilize o comando `?scale_colour_brewer` para encontrar outras paletas de cores disponíveis
 
-- Crie uma visualização para o gráfico de dispersão de `hwy` versus `displ` com um tema e uma paleta de cores que ainda não foi vista
+15. Crie uma visualização para o gráfico de dispersão de `hwy` versus `displ` com um tema e uma paleta de cores que ainda não foi vista
 
 
  
@@ -622,11 +622,11 @@ mpg %>%
 
 #### Exercícios
 
-- Utilize a função `n()` para encontrar o fabricante de automóveis com mais modelos no conjunto de dados
+16. Utilize a função `n()` (ou `count()`) para encontrar o fabricante de automóveis com mais modelos no conjunto de dados
 
-- Determine quais são os fabricantes que comercializam carros com tração traseira
+17. Determine quais são os fabricantes que comercializam carros com tração traseira
 
-- Calcule as médias de consumo na estrada dos modelos de carros do ano de 1998 e mostre os cinco mais econômicos
+18. Calcule as médias de consumo na estrada dos modelos de carros do ano de 1999 e mostre os cinco mais econômicos
 
 
 
@@ -703,9 +703,10 @@ mpg %>%
 
 - Algumas combinações de resultados não aparecem na tabela e, consequentemente, não vão aparecer no gráfico
 
-- Para remediar isso, utilizamos a função `complete`:
+- Para remediar isso, utilizamos a função `complete` do pacote `tidyr`:
 
 ```{r mpg_47}
+library(tidyr)
 mpg %>%
   group_by(class, drv) %>%
   summarise(qtde = n()) %>%
@@ -759,7 +760,7 @@ mpg %>%
 
 - Um de seus co-fundadores, o estatístico Hans Rosling, ficou conhecido em 2010 ao apresentar na BBC um vídeo de 5 minutos demonstrando como a expectativa de vida dos países aumentou nos últimos 200 anos
 
-- [Este vídeo possui mais de 8 milhões de visualizações apenas no YouTube](https://www.youtube.com/watch?v=jbkSRLYSojo)
+- [Este vídeo possui mais de 9 milhões de visualizações apenas no YouTube](https://www.youtube.com/watch?v=jbkSRLYSojo)
 
 - As questões colocadas abaixo servem como orientação para a realização de uma análise exploratória deste conjunto de dados
 

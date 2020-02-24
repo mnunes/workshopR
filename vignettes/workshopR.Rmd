@@ -703,9 +703,10 @@ mpg %>%
 
 - Algumas combinações de resultados não aparecem na tabela e, consequentemente, não vão aparecer no gráfico
 
-- Para remediar isso, utilizamos a função `complete`:
+- Para remediar isso, utilizamos a função `complete` do pacote `tidyr`:
 
 ```{r mpg_47}
+library(tidyr)
 mpg %>%
   group_by(class, drv) %>%
   summarise(qtde = n()) %>%
@@ -759,7 +760,7 @@ mpg %>%
 
 - Um de seus co-fundadores, o estatístico Hans Rosling, ficou conhecido em 2010 ao apresentar na BBC um vídeo de 5 minutos demonstrando como a expectativa de vida dos países aumentou nos últimos 200 anos
 
-- [Este vídeo possui mais de 8 milhões de visualizações apenas no YouTube](https://www.youtube.com/watch?v=jbkSRLYSojo)
+- [Este vídeo possui mais de 9 milhões de visualizações apenas no YouTube](https://www.youtube.com/watch?v=jbkSRLYSojo)
 
 - As questões colocadas abaixo servem como orientação para a realização de uma análise exploratória deste conjunto de dados
 
