@@ -159,7 +159,7 @@ vignette("workshopR")
 
   - coordenadas: informa onde o gráfico será construído, se em coordenadas cartesianas ou polares, por exemplo
 
-  - tema: camada referente à visualização geral do gráfico
+  - tema: camada referente à visualização geral do gráfico, alterando cores de fundo, formato dos eixos, tamanho da fonte e muito mais.
 
 - Trabalharemos com o conjunto de dados `mpg`
 
