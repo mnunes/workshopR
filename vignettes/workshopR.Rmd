@@ -28,6 +28,8 @@ knitr::opts_chunk$set(
 
 - Instale o RStudio: https://www.rstudio.com/products/rstudio/download/
 
+- Usuários de Windows devem instalar o programa RTools também: https://cran.r-project.org/bin/windows/Rtools/
+
 - Com o RStudio aberto, instale o material do workshop:
 
 ```{r instalacao, eval = FALSE}
@@ -141,7 +143,7 @@ vignette("workshopR")
 
 - **Sempre** teremos que transformar os dados para data frame ou construir um data frame com os dados que possuímos
 
-- Cada gráfico é formado por sete camadas: dados, estética, geometria, _facets_, estatística, coordenadas e tema
+- Cada gráfico é formado por sete camadas: dados, estética, geometria, painéis, estatística, coordenadas e tema
 
 - As três primeiras são fundamentais: **todo** gráfico vai possuí-las
   
@@ -161,7 +163,7 @@ vignette("workshopR")
 
   - tema: camada referente à visualização geral do gráfico, alterando cores de fundo, formato dos eixos, tamanho da fonte e muito mais.
 
-- Trabalharemos com o conjunto de dados `mpg`
+- Trabalharemos com o conjunto de dados `est0113`
 
 - Originalmente, este conjunto de dados faz parte do pacote `tidyverse`
 
