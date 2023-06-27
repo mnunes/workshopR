@@ -155,7 +155,7 @@ vignette("workshopR")
 
 - As quatro seguintes são opcionais: elas permitem que personalizemos nossas visualizações
 
-  - _facets_: útil quando desejamos dividir informações do gráfico para uma melhor visualização, podendo ser utilizada para comparações de grupos
+  - painéis: útil quando desejamos dividir informações do gráfico para uma melhor visualização, podendo ser utilizada para comparações de grupos
 
   - estatística: é a camada que representa a análise dos dados, caso eles sejam transformados
 
@@ -163,7 +163,7 @@ vignette("workshopR")
 
   - tema: camada referente à visualização geral do gráfico, alterando cores de fundo, formato dos eixos, tamanho da fonte e muito mais.
 
-- Trabalharemos com o conjunto de dados `est0113`
+- Trabalharemos com o conjunto de dados `mpg`
 
 - Originalmente, este conjunto de dados faz parte do pacote `tidyverse`
 
@@ -292,13 +292,13 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 
 
-### _Facets_: Como Fazer Gráficos em Painéis
+### Painéis: Como Fazer Gráficos em Painéis
 
 - Da lista dos sete componente principais de cada gráfico, nós já vimos como trabalhar com dados, estética e geometria
 
-- Ainda nos falta ver como adicionar _facets_, estatística, coordenadas e tema ao nosso produto
+- Ainda nos falta ver como adicionar painéis, estatística, coordenadas e tema ao nosso produto
 
-- Começaremos pelos _facets_
+- Começaremos pelos painéis
 
 - Veja o gráfico abaixo, dividido em painéis
 
